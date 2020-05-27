@@ -45,6 +45,9 @@ public class Ball : MonoBehaviour
 
         // Release the book from the hook
         GetComponent<SpringJoint2D>().enabled = false;
+
+        // Prevent the user from moving the ball after it is fired
+        this.enabled = false;
     }
 
 }

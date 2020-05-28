@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    // Note: drag and drop EnemyDeathEffect prefab to this variable in Unity
+    public GameObject deathEffect;
+
     public float health = 4f;
 
     // This is a callback
@@ -21,6 +24,12 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        // Show the particle effect after the enemy is dead
+        // First parameter is to called EnemyDeathEffect prefab
+        // Second parameter is the Ball position
+        // Third parameter is for no rotation
+        Instantiate(deathEffect, transform.position, Quaternion.identity);
+
         Destroy(gameObject);
     }
 }

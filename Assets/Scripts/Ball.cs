@@ -6,6 +6,8 @@ public class Ball : MonoBehaviour
 {
     // Note: drag and drop Ball's Rigidbody2D component to this variable in Unity
     public Rigidbody2D rb;
+
+    // Note: drag and drop hook object to this variable in Unity
     public Rigidbody2D hook;
 
     public float releaseTime = .15f;

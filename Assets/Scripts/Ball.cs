@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Ball : MonoBehaviour
 
     public float releaseTime = .15f;
     public float maxDragDistance = 2f;
+
+    public GameObject nextBall;
 
     private bool isPressed = false;
 
@@ -66,6 +69,20 @@ public class Ball : MonoBehaviour
 
         // Prevent the user from moving the ball after it is fired
         this.enabled = false;
+
+        yield return new WaitForSeconds(2f);
+
+        if(nextBall != null)
+        {
+            // Show the next ball
+            nextBall.SetActive(true);
+        }
+        else
+        {
+            // Restart the level
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        
     }
 
 }

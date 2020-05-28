@@ -6,8 +6,10 @@ public class Ball : MonoBehaviour
 {
     // Note: drag and drop Ball's Rigidbody2D component to this variable in Unity
     public Rigidbody2D rb;
+    public Rigidbody2D hook;
 
     public float releaseTime = .15f;
+    public float maxDragDistance = 2f;
 
     private bool isPressed = false;
 
@@ -15,9 +17,23 @@ public class Ball : MonoBehaviour
     {
         if(isPressed)
         {
-            // Move the ball based on the mouse position
-            // ScreenToWorldPoint to get the coordinates of the mouse position
-            rb.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            // Check the distance between the mouse position and the hook position
+            if(Vector3.Distance(mousePos, hook.position) > maxDragDistance)
+            {
+                // Get the direction of the mouse position, but set the distance to the maxDragDistance
+                // normalized to make sure the length of that vector is 1
+                rb.position = hook.position + (mousePos - hook.position).normalized * maxDragDistance;
+            }
+            else
+            {
+                // Move the ball based on the mouse position
+                // ScreenToWorldPoint to get the coordinates of the mouse position
+                rb.position = mousePos;
+            }
+
+           
         }
     }
 

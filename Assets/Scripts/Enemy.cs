@@ -9,6 +9,14 @@ public class Enemy : MonoBehaviour
 
     public float health = 4f;
 
+    public static int EnemiesAlive = 0;
+
+    // When the game start, each enemey ojbect loads which increases EnemiesAlive
+    void Start()
+    {
+        EnemiesAlive++;
+    }
+
     // This is a callback
     void OnCollisionEnter2D(Collision2D colInfo)
     {
@@ -29,6 +37,8 @@ public class Enemy : MonoBehaviour
         // Second parameter is the Ball position
         // Third parameter is for no rotation
         Instantiate(deathEffect, transform.position, Quaternion.identity);
+
+        EnemiesAlive--;
 
         Destroy(gameObject);
     }

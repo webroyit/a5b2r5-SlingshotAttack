@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -39,6 +40,13 @@ public class Enemy : MonoBehaviour
         Instantiate(deathEffect, transform.position, Quaternion.identity);
 
         EnemiesAlive--;
+
+        // If there is no more enemies, load the next level
+        if(EnemiesAlive <= 0)
+        {
+            // Note: Add plus 1 to this after there is more level
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
 
         Destroy(gameObject);
     }

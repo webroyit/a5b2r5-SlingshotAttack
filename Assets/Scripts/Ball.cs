@@ -38,7 +38,6 @@ public class Ball : MonoBehaviour
                 rb.position = mousePos;
             }
 
-           
         }
     }
 
@@ -79,6 +78,8 @@ public class Ball : MonoBehaviour
         }
         else
         {
+            yield return new WaitForSeconds(4f);
+
             // Restart the level
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }

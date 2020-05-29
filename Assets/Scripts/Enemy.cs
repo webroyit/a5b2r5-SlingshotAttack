@@ -1,21 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
     // Note: drag and drop EnemyDeathEffect prefab to this variable in Unity
     public GameObject deathEffect;
 
-    public float health = 4f;
-
-    public static int EnemiesAlive = 0;
+    public float health = 2f;
 
     // When the game start, each enemey ojbect loads which increases EnemiesAlive
     void Start()
     {
-        EnemiesAlive++;
+        FindObjectOfType<GameManager>().IncreaseEnemyCount();
     }
 
     // This is a callback
@@ -39,14 +36,7 @@ public class Enemy : MonoBehaviour
         // Third parameter is for no rotation
         Instantiate(deathEffect, transform.position, Quaternion.identity);
 
-        EnemiesAlive--;
-
-        // If there is no more enemies, load the next level
-        if(EnemiesAlive <= 0)
-        {
-            // Note: Add plus 1 to this after there is more level
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+        FindObjectOfType<GameManager>().DecreaseEnemyCount();
 
         Destroy(gameObject);
     }
